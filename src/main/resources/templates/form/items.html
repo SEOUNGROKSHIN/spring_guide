@@ -28,16 +28,16 @@
             <tr>
                 <th>ID</th>
                 <th>상품명</th>
+                <th>상품코스</th>
                 <th>가격</th>
-                <th>수량</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
                 <td><a href="item.html" th:href="@{/form/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">회원id</a></td>
                 <td><a href="item.html" th:href="@{|/form/items/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
-                <td th:text="${item.price}">10000</td>
-                <td th:text="${item.quantity}">10</td>
+                <td th:text="${item.itemCourse}">제주도코스</td>
+                <td th:text="${item.price}">1000</td>
             </tr>
             </tbody>
         </table>

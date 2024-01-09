@@ -18,12 +18,10 @@ public class Item {
     public Item() {
     }
 
-    public Item(Long id, String itemName, String itemCourse, Integer price, Boolean open, List<String> regions) {
-        this.id = id;
+    public Item(String itemName, String itemCourse, Integer price) {
         this.itemName = itemName;
         this.itemCourse = itemCourse;
         this.price = price;
-        this.open = open;
-        this.guideType = regions;
     }
+
 }
