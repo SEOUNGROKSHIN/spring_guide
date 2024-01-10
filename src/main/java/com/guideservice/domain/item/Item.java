@@ -12,7 +12,7 @@ public class Item {
     private String itemCourse;
     private Integer price;
 
-    private Boolean open;
+    private Boolean open; //판매 여부
     private List<String> guideType; //가이드 타입
 
     public Item() {
