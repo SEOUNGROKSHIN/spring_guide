@@ -10,6 +10,8 @@ public class Item {
     private Long id;
     private String itemName;
     private String itemCourse;
+
+    private String detail;
     private Integer price;
 
     private Boolean open; //판매 여부
