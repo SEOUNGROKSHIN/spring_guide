@@ -14,7 +14,7 @@ class ItemRepositoryTest {
 
     @Test
     public void save() {
-        Item item = new Item("제주A", "제주 둘레길", 50000);
+        Item item = new Item("제주A", "제주 둘레길", "test detail" , 50000);
         item.setItemName("제주 가이드 신승록 입니다");
         item.setItemCourse("제주도 서귀포에서 시작해서 안목해변까지 가는 코스 입니다.");
         item.setPrice(80000);
