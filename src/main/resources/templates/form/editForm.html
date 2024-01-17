@@ -15,24 +15,24 @@
 <div class="container">
 
     <div class="py-5 text-center">
-        <h2>상품 수정 폼</h2>
+        <h2 th:text="#{page.updateItem}">상품 수정 폼</h2>
     </div>
 
         <form action="item.html" th:action method="post" th:object="${item}">
             <div>
-                <label for="itemName">상품명</label>
+                <label for="itemName" th:text="#{label.item.name}">상품명</label>
                 <input type="text" id="itemName" th:field="*{itemName}" class="form-control" placeholder="상품 제목을 입력하세요">
             </div>
             <div>
-                <label for="itemCourse">상품코스</label>
+                <label for="itemCourse"th:text="#{label.item.course}">상품코스</label>
                 <input type="text" id="itemCourse" th:field="*{itemCourse}" class="form-control" placeholder="상품 코스를 입력하세요">
             </div>
             <div>
-                <label for="detail">상세</label>
+                <label for="detail" th:text="#{label.item.detail}">상세</label>
                 <textarea cols="5" rows="5" id="detail" th:field="*{detail}" class="form-control"></textarea>
             </div>
             <div>
-                <label for="price">가격</label>
+                <label for="price" th:text="#{label.item.price}">가격</label>
                 <input type="text" id="price" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
             </div>
 
