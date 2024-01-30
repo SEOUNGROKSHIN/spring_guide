@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -49,11 +52,28 @@ public class FormItemController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes) {
+    public String addItem(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        // 상품 이름은 필수 입니다.
+        if (!StringUtils.hasText(item.getItemName())) {
+            bindingResult.addError(new FieldError("item" , "itemName" , item.getItemName(), false, new String[]{"required.item.itemName"}, null, null));
+        }
+        // 상품 코스이름은 필수 입니다.
+        if(!StringUtils.hasText(item.getItemCourse())) {
+            bindingResult.addError(new FieldError("item", "itemCourse", item.getItemCourse(), false, new String[]{"required.item.itemCourse"}, null, null));
+        }
+
+        //검증에 실패하면 다시 입력 폼으로
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}" , bindingResult);
+            return "form/addForm";
+        }
+        
         log.info("item.open{}", item.getOpen());
         log.info("item.regions", item.getRegions());
         log.info("item.itemType", item.getItemType());
-
+        
+        // 검증 성공시 수행
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);

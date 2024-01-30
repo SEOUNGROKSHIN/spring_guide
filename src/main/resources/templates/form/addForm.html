@@ -8,6 +8,10 @@
         .container {
             max-width: 560px;
         }
+        .field-error{
+            border-color: #dc3545;
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -19,13 +23,22 @@
     </div>
 
     <form action="item.html" th:action method="post" th:object="${item}">
+
         <div>
             <label for="itemName" th:text="#{label.item.name}">상품명</label>
-            <input type="text" id="itemName" th:field="*{itemName}" class="form-control" placeholder="상품 제목을 입력하세요">
+            <input type="text" id="itemName" th:field="*{itemName}"
+                   th:errorclass="field-error" class="form-control" placeholder="상품 제목을 입력하세요">
+            <div class="field-error" th:errors="*{itemName}">
+                상품명 오류
+            </div>
         </div>
         <div>
             <label for="itemCourse" th:text="#{label.item.course}">상품코스</label>
-            <input type="text" id="itemCourse" th:field="*{itemCourse}" class="form-control" placeholder="상품 코스를 입력하세요">
+            <input type="text" id="itemCourse" th:field="*{itemCourse}"
+                   th:errorclass="field-error" class="form-control" placeholder="상품 코스를 입력하세요">
+           <div class="field-error" th:errors="*{itemCourse}">
+                상품코스 오류
+            </div>
         </div>
         <div>
             <label for="detail" th:text="#{label.item.detail}">상세</label>
