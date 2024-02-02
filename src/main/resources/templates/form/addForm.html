@@ -43,6 +43,9 @@
         <div>
             <label for="detail" th:text="#{label.item.detail}">상세</label>
             <textarea cols="5" rows="5" id="detail" th:field="*{detail}" class="form-control"></textarea>
+            <div class="field-error" th:errors="*{detail}">
+                상품상세 오류
+            </div>
         </div>
         <div>
             <label for="price" th:text="#{label.item.price}">가격</label>

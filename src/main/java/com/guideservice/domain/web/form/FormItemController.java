@@ -62,6 +62,10 @@ public class FormItemController {
         if(!StringUtils.hasText(item.getItemCourse())) {
             bindingResult.addError(new FieldError("item", "itemCourse", item.getItemCourse(), false, new String[]{"required.item.itemCourse"}, null, null));
         }
+        // 상품 상세는 필수 입니다.
+        if(StringUtils.hasText(item.getDetail())) {
+            bindingResult.addError(new FieldError("item", "detail" , item.getDetail(), false, new String[]{"required.item.detail"}, null, null));
+        }
 
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
