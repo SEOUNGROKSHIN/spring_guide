@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -56,17 +57,19 @@ public class FormItemController {
 
         // 상품 이름은 필수 입니다.
         if (!StringUtils.hasText(item.getItemName())) {
-            bindingResult.addError(new FieldError("item" , "itemName" , item.getItemName(), false, new String[]{"required.item.itemName"}, null, null));
+              bindingResult.rejectValue("itemName", "required.item.itemName");
         }
         // 상품 코스이름은 필수 입니다.
         if(!StringUtils.hasText(item.getItemCourse())) {
-            bindingResult.addError(new FieldError("item", "itemCourse", item.getItemCourse(), false, new String[]{"required.item.itemCourse"}, null, null));
+            bindingResult.rejectValue("itemCourse", "required.item.itemCourse");
         }
         // 상품 상세는 필수 입니다.
-        if(StringUtils.hasText(item.getDetail())) {
-            bindingResult.addError(new FieldError("item", "detail" , item.getDetail(), false, new String[]{"required.item.detail"}, null, null));
+        if(!StringUtils.hasText(item.getDetail())) {
+            bindingResult.rejectValue("detail", "required.item.detail");
         }
-
+        // 가격은 10000 이상 10만원 이하
+        if(item.getPrice() == null || item.getPrice() <= 10000 || item.getPrice() >= 100000)
+            bindingResult.rejectValue("price", "range.item.price" , new Object[]{10000, 100000}, null);
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("errors={}" , bindingResult);
