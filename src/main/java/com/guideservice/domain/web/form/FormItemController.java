@@ -3,12 +3,12 @@ package com.guideservice.domain.web.form;
 import com.guideservice.domain.item.Item;
 import com.guideservice.domain.item.ItemRepository;
 import com.guideservice.domain.item.ItemType;
-import com.guideservice.domain.item.ItemValidation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,7 +23,6 @@ import java.util.Map;
 public class FormItemController {
 
     private final ItemRepository itemRepository;
-    private final ItemValidation itemValidation;
 
     @ModelAttribute("regions")
     public Map<String , String> regions() {
@@ -52,9 +51,7 @@ public class FormItemController {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        itemValidation.validate(item , bindingResult);
+    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
